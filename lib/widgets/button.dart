@@ -20,11 +20,11 @@ class _ButtonState extends State<Button> {
       ),
       child: const Center(
         child: Text(
-          "Next",
+          "Log in",
           style: TextStyle(
             color: kWhite,
             fontSize: 20,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
