@@ -84,6 +84,14 @@ class _DetailsState extends State<Details> {
                         height: 20,
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Pleace enter Email";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: userEmail,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
                           border: OutlineInputBorder(
@@ -101,6 +109,14 @@ class _DetailsState extends State<Details> {
                         height: 20,
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Pleace enter Password";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: userPassword,
                         obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
@@ -119,6 +135,14 @@ class _DetailsState extends State<Details> {
                         height: 20,
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Pleace enter Comfirm Password";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: userComfirmPassword,
                         obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
@@ -161,7 +185,17 @@ class _DetailsState extends State<Details> {
                       const SizedBox(
                         height: 50,
                       ),
-                      const Button()
+                      GestureDetector(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            String name = userName.text;
+                            String email = userEmail.text;
+                            String password = userPassword.text;
+                            String comfirmPassword = userComfirmPassword.text;
+                          }
+                        },
+                        child: const Button(),
+                      )
                     ],
                   ),
                 )
