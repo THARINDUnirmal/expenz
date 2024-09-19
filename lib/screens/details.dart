@@ -1,3 +1,4 @@
+import 'package:expenz_app/services/user_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -186,12 +187,20 @@ class _DetailsState extends State<Details> {
                         height: 50,
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
                             String name = userName.text;
                             String email = userEmail.text;
                             String password = userPassword.text;
                             String comfirmPassword = userComfirmPassword.text;
+
+                            UserServices.userDataStroe(
+                              userName: name,
+                              userEmail: email,
+                              userPassword: password,
+                              comfirmPassword: comfirmPassword,
+                              context: context,
+                            );
                           }
                         },
                         child: const Button(),
