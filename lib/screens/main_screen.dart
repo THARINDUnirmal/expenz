@@ -1,3 +1,8 @@
+import 'package:expenz_app/screens/add_screen.dart';
+import 'package:expenz_app/screens/budget_screen.dart';
+import 'package:expenz_app/screens/home_screen.dart';
+import 'package:expenz_app/screens/profile_screen.dart';
+import 'package:expenz_app/screens/transaction_screen.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +16,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   //pages list
 
-  final List<Widget> pages = [];
+  final List<Widget> pages = const [
+    HomeScreen(),
+    TransactionScreen(),
+    AddScreen(),
+    BudgetScreen(),
+    ProfileScreen(),
+  ];
 
   //curunt index
   int cIndex = 0;
@@ -30,6 +41,11 @@ class _MainScreenState extends State<MainScreen> {
         unselectedIconTheme: const IconThemeData(
           size: 25,
         ),
+        onTap: (value) {
+          setState(() {
+            cIndex = value;
+          });
+        },
         items: [
           const BottomNavigationBarItem(
               icon: Icon(
@@ -69,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
         type: BottomNavigationBarType.fixed,
       ),
-      //body: pages[cIndex],
+      body: pages[cIndex],
     );
   }
 }

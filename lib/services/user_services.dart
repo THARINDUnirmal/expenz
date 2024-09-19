@@ -1,4 +1,3 @@
-import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,16 +19,17 @@ class UserServices {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text(
-                "User details store succsessfull",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: kWhite,
-                  fontWeight: FontWeight.w600,
-                ),
+                "User Details Store Succsessfull",
               ),
             ),
           );
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Please Check Password And Comfirm Password"),
+          ),
+        );
       }
     } catch (e) {
       e.toString();

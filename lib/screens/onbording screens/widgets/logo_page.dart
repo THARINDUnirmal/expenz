@@ -14,7 +14,7 @@ class LogoPage extends StatelessWidget {
           width: 200,
           fit: BoxFit.cover,
         ),
-        Text(
+        const Text(
           "Expenz",
           style: TextStyle(
             fontSize: 50,

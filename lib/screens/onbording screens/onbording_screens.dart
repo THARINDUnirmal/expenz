@@ -66,7 +66,7 @@ class _OnbordingScreensState extends State<OnbordingScreens> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Details(),
+                      builder: (context) => const Details(),
                     ),
                   );
                 },
