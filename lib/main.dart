@@ -1,4 +1,5 @@
-import 'package:expenz_app/screens/onbording%20screens/onbording_screens.dart';
+import 'package:expenz_app/services/user_services.dart';
+import 'package:expenz_app/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,12 +14,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: "Inter",
-      ),
-      debugShowCheckedModeBanner: false,
-      home: OnbordingScreens(),
+    return FutureBuilder(
+      future: UserServices.isStroeUserData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else {
+          bool hasUserName = snapshot.data ?? false;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              fontFamily: "Inter",
+            ),
+            home: Wrapper(
+              displayUi: hasUserName,
+            ),
+          );
+        }
+      },
     );
   }
 }

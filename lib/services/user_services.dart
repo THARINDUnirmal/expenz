@@ -35,4 +35,14 @@ class UserServices {
       e.toString();
     }
   }
+
+  static Future<bool> isStroeUserData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? isIn = pref.getString("userName");
+    if (isIn == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

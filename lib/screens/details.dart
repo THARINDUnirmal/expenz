@@ -1,3 +1,4 @@
+import 'package:expenz_app/screens/main_screen.dart';
 import 'package:expenz_app/services/user_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
@@ -194,12 +195,18 @@ class _DetailsState extends State<Details> {
                             String password = userPassword.text;
                             String comfirmPassword = userComfirmPassword.text;
 
-                            UserServices.userDataStroe(
+                            await UserServices.userDataStroe(
                               userName: name,
                               userEmail: email,
                               userPassword: password,
                               comfirmPassword: comfirmPassword,
                               context: context,
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MainScreen(),
+                              ),
                             );
                           }
                         },
