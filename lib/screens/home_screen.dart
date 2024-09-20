@@ -1,4 +1,5 @@
 import 'package:expenz_app/utils/colors.dart';
+import 'package:expenz_app/widgets/expenz_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,14 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
             padding: const EdgeInsets.all(5),
-            height: MediaQuery.of(context).size.height * 0.33,
+            height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
-              color: Colors.amber,
+              color: kMainColor.withOpacity(0.37),
             ),
             child: Column(
               children: [
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
                           "assets/images/user.jpg",
-                          width: 80,
+                          width: 70,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -65,6 +66,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ExpenzWidget(
+                        cardImageUrl: "assets/images/income.png",
+                        cardColor: kGreen,
+                        cardTitle: "Income",
+                        cardPrice: 5000,
+                      ),
+                      ExpenzWidget(
+                        cardImageUrl: "assets/images/expense.png",
+                        cardColor: kRed,
+                        cardTitle: "Expense",
+                        cardPrice: 1200,
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           )

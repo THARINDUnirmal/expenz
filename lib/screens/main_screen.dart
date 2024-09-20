@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
               label: "Home"),
           const BottomNavigationBarItem(
               icon: Icon(
-                Icons.transcribe,
+                Icons.route_rounded,
               ),
               label: "Transaction"),
           BottomNavigationBarItem(
