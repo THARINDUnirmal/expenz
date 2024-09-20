@@ -1,3 +1,4 @@
+import 'package:expenz_app/services/user_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/expenz_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String userName = "";
+  @override
+  void initState() {
+    UserServices.getUserDetails().then(
+      (value) {
+        setState(() {
+          if (value["userName"] != null) {
+            userName = value["userName"]!;
+          }
+        });
+      },
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    const Text(
-                      "Wellowcom Tharindu",
-                      style: TextStyle(
+                    Text(
+                      "Wellowcom $userName",
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),

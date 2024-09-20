@@ -36,6 +36,8 @@ class UserServices {
     }
   }
 
+  //cheack user name
+
   static Future<bool> isStroeUserData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? isIn = pref.getString("userName");
@@ -44,5 +46,15 @@ class UserServices {
     } else {
       return true;
     }
+  }
+
+  //get user Name and user Email
+
+  static Future<Map<String, String>> getUserDetails() async {
+    SharedPreferences prf = await SharedPreferences.getInstance();
+    String? uName = prf.getString("userName");
+    String? uEmail = prf.getString("userEmail");
+
+    return {"userName": uName!, "userEmail": uEmail!};
   }
 }
