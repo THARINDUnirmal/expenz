@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   //curunt index
-  int cIndex = 0;
+  int cIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
