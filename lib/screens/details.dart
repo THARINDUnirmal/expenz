@@ -165,7 +165,7 @@ class _DetailsState extends State<Details> {
                       Row(
                         children: [
                           const Text(
-                            "Remember Me for the next time",
+                            "Remember me for the next time",
                             style: TextStyle(
                               fontSize: 19,
                               fontWeight: FontWeight.w600,

@@ -1,4 +1,7 @@
+import 'package:expenz_app/models/expense%20_categories.dart';
 import 'package:expenz_app/utils/colors.dart';
+import 'package:expenz_app/widgets/button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatefulWidget {
@@ -124,10 +127,14 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                 ),
                 Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 30,
+                    horizontal: 10,
+                  ),
                   margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.3,
                   ),
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -136,9 +143,89 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                     color: kWhite,
                   ),
-                  child: const Form(
+                  child: Form(
                     child: Column(
-                      children: [],
+                      children: [
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            hintText: "Category",
+                            hintStyle: const TextStyle(
+                              color: kGrey,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                          items: selectIndex == 0
+                              ? ExpenseCategories.values.map((c) {
+                                  return DropdownMenuItem(
+                                    value: c,
+                                    child: Text(c.name),
+                                  );
+                                }).toList()
+                              : IncomeCategories.values.map((c) {
+                                  return DropdownMenuItem(
+                                    value: c,
+                                    child: Text(c.name),
+                                  );
+                                }).toList(),
+                          onChanged: (value) {},
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.025,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Category",
+                            hintStyle: const TextStyle(
+                              color: kGrey,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.025,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Category",
+                            hintStyle: const TextStyle(
+                              color: kGrey,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.025,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Category",
+                            hintStyle: const TextStyle(
+                              color: kGrey,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                        ),
+                        const Button()
+                      ],
                     ),
                   ),
                 ),
