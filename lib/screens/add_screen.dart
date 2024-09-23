@@ -3,6 +3,7 @@ import 'package:expenz_app/models/income%20_categories.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -15,6 +16,17 @@ class _AddScreenState extends State<AddScreen> {
   int selectIndex = 0;
   ExpenseCategories _expenseCategories = ExpenseCategories.food;
   IncomeCategories _incomeCategories = IncomeCategories.freelance;
+
+  //contrallers
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _amount = TextEditingController();
+
+  //date picker
+  DateTime _date = DateTime.now();
+
+  //time picker
+  DateTime _timeNow = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class _AddScreenState extends State<AddScreen> {
                   margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.3,
                   ),
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.75,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -193,6 +205,7 @@ class _AddScreenState extends State<AddScreen> {
                           height: MediaQuery.of(context).size.height * 0.025,
                         ),
                         TextFormField(
+                          controller: _title,
                           decoration: InputDecoration(
                             hintText: "Title",
                             hintStyle: const TextStyle(
@@ -211,6 +224,7 @@ class _AddScreenState extends State<AddScreen> {
                           height: MediaQuery.of(context).size.height * 0.025,
                         ),
                         TextFormField(
+                          controller: _description,
                           decoration: InputDecoration(
                             hintText: "Description",
                             hintStyle: const TextStyle(
@@ -229,6 +243,8 @@ class _AddScreenState extends State<AddScreen> {
                           height: MediaQuery.of(context).size.height * 0.025,
                         ),
                         TextFormField(
+                          controller: _amount,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Amount",
                             hintStyle: const TextStyle(
@@ -244,15 +260,136 @@ class _AddScreenState extends State<AddScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: MediaQuery.of(context).size.height * 0.02,
                         ),
-                        const Button()
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2025),
+                                ).then(
+                                  (value) {
+                                    if (value != null) {
+                                      setState(() {
+                                        _date = value;
+                                      });
+                                    }
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                  vertical: 15,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: kMainColor,
+                                ),
+                                child: const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_month_outlined,
+                                      color: kWhite,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Select Date",
+                                      style: TextStyle(
+                                        color: kWhite,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Text(
+                              DateFormat.yMMMd().format(_date),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                ).then(
+                                  (value) {
+                                    if (value != null) {
+                                      setState(() {
+                                        _timeNow = DateTime(
+                                          _date.year,
+                                          _date.month,
+                                          _date.day,
+                                          value.hour,
+                                          value.minute,
+                                        );
+                                      });
+                                    }
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                  vertical: 15,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: kYellow,
+                                ),
+                                child: const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_month_outlined,
+                                      color: kWhite,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Select Time",
+                                      style: TextStyle(
+                                        color: kWhite,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Text(
+                              DateFormat.jm().format(_timeNow),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                        ),
+                        Button(
+                          buttonTitle: "Add",
+                          buttonColor: selectIndex == 0 ? kRed : kGreen,
+                        )
                       ],
                     ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

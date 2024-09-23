@@ -70,7 +70,10 @@ class _OnbordingScreensState extends State<OnbordingScreens> {
                     ),
                   );
                 },
-                child: const Button(),
+                child: const Button(
+                  buttonColor: kMainColor,
+                  buttonTitle: "Log in",
+                ),
               ),
             ),
           ],

@@ -210,7 +210,10 @@ class _DetailsState extends State<Details> {
                             );
                           }
                         },
-                        child: const Button(),
+                        child: const Button(
+                          buttonColor: kMainColor,
+                          buttonTitle: "Log in",
+                        ),
                       )
                     ],
                   ),

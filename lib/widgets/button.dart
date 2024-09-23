@@ -2,7 +2,14 @@ import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatefulWidget {
-  const Button({super.key});
+  final Color buttonColor;
+  final String buttonTitle;
+
+  const Button({
+    super.key,
+    required this.buttonTitle,
+    required this.buttonColor,
+  });
 
   @override
   State<Button> createState() => _ButtonState();
@@ -16,12 +23,12 @@ class _ButtonState extends State<Button> {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: kMainColor,
+        color: widget.buttonColor,
       ),
-      child: const Center(
+      child: Center(
         child: Text(
-          "Log in",
-          style: TextStyle(
+          widget.buttonTitle,
+          style: const TextStyle(
             color: kWhite,
             fontSize: 20,
             fontWeight: FontWeight.w700,
