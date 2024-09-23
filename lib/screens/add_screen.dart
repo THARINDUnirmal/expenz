@@ -1,7 +1,7 @@
 import 'package:expenz_app/models/expense%20_categories.dart';
+import 'package:expenz_app/models/income%20_categories.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatefulWidget {
@@ -13,6 +13,9 @@ class AddScreen extends StatefulWidget {
 
 class _AddScreenState extends State<AddScreen> {
   int selectIndex = 0;
+  ExpenseCategories _expenseCategories = ExpenseCategories.food;
+  IncomeCategories _incomeCategories = IncomeCategories.freelance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +156,9 @@ class _AddScreenState extends State<AddScreen> {
                               color: kGrey,
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                              vertical: 20,
+                              horizontal: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
@@ -171,19 +176,32 @@ class _AddScreenState extends State<AddScreen> {
                                     child: Text(c.name),
                                   );
                                 }).toList(),
-                          onChanged: (value) {},
+                          value: selectIndex == 0
+                              ? _expenseCategories
+                              : _incomeCategories,
+                          onChanged: (value) {
+                            setState(() {
+                              selectIndex == 0
+                                  ? _expenseCategories =
+                                      value as ExpenseCategories
+                                  : _incomeCategories =
+                                      value as IncomeCategories;
+                            });
+                          },
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.025,
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: "Category",
+                            hintText: "Title",
                             hintStyle: const TextStyle(
                               color: kGrey,
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                              vertical: 20,
+                              horizontal: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
@@ -194,12 +212,14 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: "Category",
+                            hintText: "Description",
                             hintStyle: const TextStyle(
                               color: kGrey,
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                              vertical: 20,
+                              horizontal: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
@@ -210,12 +230,14 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: "Category",
+                            hintText: "Amount",
                             hintStyle: const TextStyle(
                               color: kGrey,
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 20),
+                              vertical: 20,
+                              horizontal: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
