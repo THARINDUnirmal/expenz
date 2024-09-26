@@ -109,7 +109,7 @@ class _AddScreenState extends State<AddScreen> {
                     horizontal: 20,
                   ),
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.15,
+                    top: MediaQuery.of(context).size.height * 0.13,
                   ),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +147,7 @@ class _AddScreenState extends State<AddScreen> {
                     horizontal: 10,
                   ),
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.3,
+                    top: MediaQuery.of(context).size.height * 0.27,
                   ),
                   height: MediaQuery.of(context).size.height * 0.75,
                   width: double.infinity,
@@ -312,7 +312,7 @@ class _AddScreenState extends State<AddScreen> {
                               ),
                             ),
                             Text(
-                              DateFormat.yMMMd().format(_date),
+                              DateFormat("y, MMMM, dd").format(_date),
                             ),
                           ],
                         ),
@@ -355,7 +355,7 @@ class _AddScreenState extends State<AddScreen> {
                                 child: const Row(
                                   children: [
                                     Icon(
-                                      Icons.calendar_month_outlined,
+                                      Icons.more_time,
                                       color: kWhite,
                                     ),
                                     SizedBox(
