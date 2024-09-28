@@ -44,4 +44,31 @@ final class Expense {
     required this.time,
     required this.description,
   });
+
+  //convert to expense object to a json object
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "title": title,
+      "amount": amount,
+      "category": category.index,
+      "date": date.toIso8601String(),
+      "time": time.toIso8601String(),
+      "description": description
+    };
+  }
+
+  //convert to json object to expense object
+
+  factory Expense.formJson(Map<String, dynamic> json) {
+    return Expense(
+        id: json["id"],
+        title: json["title"],
+        amount: json["amount"],
+        category: ExpenseCategories.values[json["category"]],
+        date: DateTime.parse(json["date"]),
+        time: DateTime.parse(json["time"]),
+        description: json["description"]);
+  }
 }
