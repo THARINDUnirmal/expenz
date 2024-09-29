@@ -1,17 +1,20 @@
 import 'package:expenz_app/models/expense%20_categories.dart';
 import 'package:expenz_app/models/income%20_categories.dart';
 import 'package:expenz_app/services/expense_servicers.dart';
+import 'package:expenz_app/services/income_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddScreen extends StatefulWidget {
+  final Function(Income) addIncome;
   final Function(Expense) addExpense;
 
   const AddScreen({
     super.key,
     required this.addExpense,
+    required this.addIncome,
   });
 
   @override
@@ -388,23 +391,56 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            List<Expense> exList =
-                                await ExpenseServicers().loadExpenses();
+                            if (selectIndex == 0) {
+                              List<Expense> exList =
+                                  await ExpenseServicers().loadExpenses();
 
-                            Expense expensesData = Expense(
-                              id: exList.length + 1,
-                              title: _title.text,
-                              amount: _amount.text.isEmpty
-                                  ? 0
-                                  : double.parse(_amount.text),
-                              category: _expenseCategories,
-                              date: _date,
-                              time: _timeNow,
-                              description: _description.text,
-                            );
+                              Expense expensesData = Expense(
+                                id: exList.length + 1,
+                                title: _title.text,
+                                amount: _amount.text.isEmpty
+                                    ? 0
+                                    : double.parse(_amount.text),
+                                category: _expenseCategories,
+                                date: _date,
+                                time: _timeNow,
+                                description: _description.text,
+                              );
 
-                            //add expenses
-                            widget.addExpense(expensesData);
+                              //add expenses
+                              widget.addExpense(expensesData);
+
+                              //clear filds data in Ui
+                              _title.clear();
+                              _description.clear();
+                              _amount.clear();
+                            } else {
+                              //load income data to create income id
+
+                              List<Income> incomeDataList =
+                                  await IncomeServices().loadIncome();
+
+                              //create id
+                              Income incomeData = Income(
+                                id: incomeDataList.length + 1,
+                                title: _title.text,
+                                amount: _amount.text.isEmpty
+                                    ? 0
+                                    : double.parse(_amount.text),
+                                category: _incomeCategories,
+                                date: _date,
+                                time: _timeNow,
+                                description: _description.text,
+                              );
+
+                              //add income
+                              widget.addIncome(incomeData);
+
+                              //clear filds data in Ui
+                              _title.clear();
+                              _description.clear();
+                              _amount.clear();
+                            }
                           },
                           child: Button(
                             buttonTitle: "Add",

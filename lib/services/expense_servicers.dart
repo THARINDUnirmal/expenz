@@ -38,7 +38,7 @@ class ExpenseServicers {
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Data added succsess"),
+          content: Text("Expense Data added succsess"),
           duration: Duration(seconds: 2),
         ));
       }
