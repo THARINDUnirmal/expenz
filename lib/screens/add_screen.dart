@@ -1,12 +1,18 @@
 import 'package:expenz_app/models/expense%20_categories.dart';
 import 'package:expenz_app/models/income%20_categories.dart';
+import 'package:expenz_app/services/expense_servicers.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddScreen extends StatefulWidget {
-  const AddScreen({super.key});
+  final Function(Expense) addExpense;
+
+  const AddScreen({
+    super.key,
+    required this.addExpense,
+  });
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -380,9 +386,30 @@ class _AddScreenState extends State<AddScreen> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05,
                         ),
-                        Button(
-                          buttonTitle: "Add",
-                          buttonColor: selectIndex == 0 ? kRed : kGreen,
+                        GestureDetector(
+                          onTap: () async {
+                            List<Expense> exList =
+                                await ExpenseServicers().loadExpenses();
+
+                            Expense expensesData = Expense(
+                              id: exList.length + 1,
+                              title: _title.text,
+                              amount: _amount.text.isEmpty
+                                  ? 0
+                                  : double.parse(_amount.text),
+                              category: _expenseCategories,
+                              date: _date,
+                              time: _timeNow,
+                              description: _description.text,
+                            );
+
+                            //add expenses
+                            widget.addExpense(expensesData);
+                          },
+                          child: Button(
+                            buttonTitle: "Add",
+                            buttonColor: selectIndex == 0 ? kRed : kGreen,
+                          ),
                         )
                       ],
                     ),
