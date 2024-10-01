@@ -92,11 +92,11 @@ class IncomeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "-RS ${amount.toString()}",
+                "+RS ${amount.toString()}",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: kRed,
+                  color: kGreen,
                 ),
               ),
               Text(
