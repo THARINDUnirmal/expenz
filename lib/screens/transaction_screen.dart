@@ -4,11 +4,13 @@ import 'package:expenz_app/widgets/expense_card.dart';
 import 'package:flutter/material.dart';
 
 class TransactionScreen extends StatefulWidget {
+  final void Function(Expense) deleteExpense;
   final List<Expense> expensesList;
 
   const TransactionScreen({
     super.key,
     required this.expensesList,
+    required this.deleteExpense,
   });
 
   @override
@@ -55,16 +57,40 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   itemCount: widget.expensesList.length,
                   itemBuilder: (context, index) {
                     Expense indexExpense = widget.expensesList[index];
-                    return ExpenseCard(
-                      cardTitle: indexExpense.title,
-                      description: indexExpense.description,
-                      cardImage: indexExpense.category,
-                      amount: indexExpense.amount,
-                      time: indexExpense.time,
+
+                    return Dismissible(
+                      key: ValueKey(indexExpense),
+                      direction: DismissDirection.startToEnd,
+                      onDismissed: (direction) {
+                        setState(() {
+                          widget.deleteExpense(indexExpense);
+                        });
+                      },
+                      child: ExpenseCard(
+                        cardTitle: indexExpense.title,
+                        description: indexExpense.description,
+                        cardImage: indexExpense.category,
+                        amount: indexExpense.amount,
+                        time: indexExpense.time,
+                      ),
                     );
                   },
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Income",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: kBlack,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

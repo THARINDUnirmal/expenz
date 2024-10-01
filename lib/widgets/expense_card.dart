@@ -25,7 +25,7 @@ class ExpenseCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(
         vertical: 15,
-        horizontal: 5,
+        horizontal: 10,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -67,14 +67,17 @@ class ExpenseCard extends StatelessWidget {
                   color: kBlack,
                 ),
               ),
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: kGrey.withOpacity(0.8),
+              SizedBox(
+                width: 130,
+                child: Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: kGrey.withOpacity(0.8),
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
