@@ -103,7 +103,7 @@ class IncomeServices {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Error on removing Income"),
+            content: Text("Income Delete Succsess...!"),
             duration: Duration(seconds: 2),
           ),
         );
