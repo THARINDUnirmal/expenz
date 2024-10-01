@@ -1,22 +1,22 @@
-import 'package:expenz_app/models/expense%20_categories.dart';
+import 'package:expenz_app/models/income%20_categories.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ExpenseCard extends StatelessWidget {
+class IncomeCard extends StatelessWidget {
   final String cardTitle;
-  final String description;
-  final ExpenseCategories cardImage;
-  final double amount;
+  final String cardDescription;
   final DateTime time;
+  final IncomeCategories cardImage;
+  final double amount;
 
-  const ExpenseCard({
+  const IncomeCard({
     super.key,
-    required this.cardTitle,
-    required this.description,
     required this.cardImage,
-    required this.amount,
+    required this.cardTitle,
+    required this.cardDescription,
     required this.time,
+    required this.amount,
   });
 
   @override
@@ -47,7 +47,7 @@ class ExpenseCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Image.asset(
-              expenseCategoryImages[cardImage]!,
+              incomeCategoryImages[cardImage]!,
               width: 50,
               fit: BoxFit.cover,
             ),
@@ -74,7 +74,7 @@ class ExpenseCard extends StatelessWidget {
               SizedBox(
                 width: 130,
                 child: Text(
-                  description,
+                  cardDescription,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
