@@ -19,7 +19,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   //curunt index
-  int cIndex = 2;
+  int cIndex = 1;
 
   //fetch all expenses data
   List<Expense> allExpenses = [];
@@ -78,7 +78,9 @@ class _MainScreenState extends State<MainScreen> {
     //pages list
     final List<Widget> pages = [
       const HomeScreen(),
-      const TransactionScreen(),
+      TransactionScreen(
+        expensesList: allExpenses,
+      ),
       AddScreen(
         addIncome: addIncome,
         addExpense: addExpenses,
