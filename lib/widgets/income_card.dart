@@ -25,7 +25,7 @@ class IncomeCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(
         vertical: 15,
-        horizontal: 10,
+        horizontal: 5,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -42,13 +42,14 @@ class IncomeCard extends StatelessWidget {
         children: [
           // Card image
           Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
+              color: const Color(0xffCFFAEA),
             ),
             child: Image.asset(
               incomeCategoryImages[cardImage]!,
-              width: 50,
+              width: 45,
               fit: BoxFit.cover,
             ),
           ),
