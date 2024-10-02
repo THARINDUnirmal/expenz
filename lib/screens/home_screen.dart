@@ -1,6 +1,7 @@
 import 'package:expenz_app/services/user_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/expenz_widget.dart';
+import 'package:expenz_app/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.all(5),
@@ -105,6 +107,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.04,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Spend Frequency",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: kBlack,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                const LineChartSample()
               ],
             ),
           )
