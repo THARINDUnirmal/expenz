@@ -24,6 +24,8 @@ class _MainScreenState extends State<MainScreen> {
   //fetch all expenses data
   List<Expense> allExpenses = [];
   List<Income> allIncomes = [];
+  double expensesAmount = 0;
+  double incomeAmount = 0;
 
   //fetch all income data
   void fetchAllIncomes() async {

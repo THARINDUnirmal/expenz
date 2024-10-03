@@ -7,6 +7,7 @@ import 'package:expenz_app/widgets/expenz_widget.dart';
 import 'package:expenz_app/widgets/income_card.dart';
 import 'package:expenz_app/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Expense> allExpensesList;
@@ -99,13 +100,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Wellcome !",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          GradientText("Wellcome !",
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              colors: const [
+                                Color.fromARGB(255, 37, 33, 243),
+                                Color.fromARGB(255, 224, 22, 231),
+                                Colors.red,
+                              ]),
                           Text(
                             userName,
                             style: const TextStyle(

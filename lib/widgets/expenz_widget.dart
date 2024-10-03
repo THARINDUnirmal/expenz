@@ -19,7 +19,7 @@ class ExpenzWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(7),
-      width: MediaQuery.of(context).size.width * 0.45,
+      width: MediaQuery.of(context).size.width * 0.46,
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(25),
