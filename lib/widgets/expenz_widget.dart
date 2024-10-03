@@ -1,11 +1,11 @@
 import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class ExpenzWidget extends StatefulWidget {
+class ExpenzWidget extends StatelessWidget {
   final Color cardColor;
   final String cardImageUrl;
   final String cardTitle;
-  final int cardPrice;
+  final double cardPrice;
 
   const ExpenzWidget({
     super.key,
@@ -16,17 +16,12 @@ class ExpenzWidget extends StatefulWidget {
   });
 
   @override
-  State<ExpenzWidget> createState() => _ExpenzWidgetState();
-}
-
-class _ExpenzWidgetState extends State<ExpenzWidget> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width * 0.43,
+      padding: const EdgeInsets.all(7),
+      width: MediaQuery.of(context).size.width * 0.45,
       decoration: BoxDecoration(
-        color: widget.cardColor,
+        color: cardColor,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
@@ -38,19 +33,19 @@ class _ExpenzWidgetState extends State<ExpenzWidget> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Image.asset(
-              widget.cardImageUrl,
+              cardImageUrl,
               width: MediaQuery.of(context).size.width * 0.1,
               fit: BoxFit.cover,
             ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.03,
+            width: MediaQuery.of(context).size.width * 0.015,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.cardTitle,
+                cardTitle,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -58,9 +53,9 @@ class _ExpenzWidgetState extends State<ExpenzWidget> {
                 ),
               ),
               Text(
-                "\$${widget.cardPrice.toString()}",
+                "Rs $cardPrice",
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: kWhite,
                 ),

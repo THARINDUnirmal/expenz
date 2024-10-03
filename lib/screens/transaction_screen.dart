@@ -59,31 +59,41 @@ class _TransactionScreenState extends State<TransactionScreen> {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: widget.expensesList.length,
-                  itemBuilder: (context, index) {
-                    Expense indexExpense = widget.expensesList[index];
+                child: widget.expensesList.isEmpty
+                    ? const Text(
+                        "No Expenses added yet, Please add some expenses to see here !",
+                        style: TextStyle(
+                          color: kGrey,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: widget.expensesList.length,
+                        itemBuilder: (context, index) {
+                          Expense indexExpense = widget.expensesList[index];
 
-                    return Dismissible(
-                      key: ValueKey(indexExpense),
-                      direction: DismissDirection.startToEnd,
-                      onDismissed: (direction) {
-                        setState(() {
-                          widget.deleteExpense(indexExpense);
-                        });
-                      },
-                      child: ExpenseCard(
-                        cardTitle: indexExpense.title,
-                        description: indexExpense.description,
-                        cardImage: indexExpense.category,
-                        amount: indexExpense.amount,
-                        time: indexExpense.time,
+                          return Dismissible(
+                            key: ValueKey(indexExpense),
+                            direction: DismissDirection.startToEnd,
+                            onDismissed: (direction) {
+                              setState(() {
+                                widget.deleteExpense(indexExpense);
+                              });
+                            },
+                            child: ExpenseCard(
+                              cardTitle: indexExpense.title,
+                              description: indexExpense.description,
+                              cardImage: indexExpense.category,
+                              amount: indexExpense.amount,
+                              time: indexExpense.time,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.025,
@@ -101,31 +111,41 @@ class _TransactionScreenState extends State<TransactionScreen> {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: widget.incomeList.length,
-                  itemBuilder: (context, index) {
-                    Income income = widget.incomeList[index];
+                child: widget.incomeList.isEmpty
+                    ? const Text(
+                        "No Incomes added yet, Please add some incomes to see here !",
+                        style: TextStyle(
+                          color: kGrey,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: widget.incomeList.length,
+                        itemBuilder: (context, index) {
+                          Income income = widget.incomeList[index];
 
-                    return Dismissible(
-                      key: ValueKey(income),
-                      direction: DismissDirection.startToEnd,
-                      onDismissed: (direction) {
-                        setState(() {
-                          widget.removeIncome(income);
-                        });
-                      },
-                      child: IncomeCard(
-                        cardImage: income.category,
-                        cardTitle: income.title,
-                        cardDescription: income.description,
-                        time: income.time,
-                        amount: income.amount,
+                          return Dismissible(
+                            key: ValueKey(income),
+                            direction: DismissDirection.startToEnd,
+                            onDismissed: (direction) {
+                              setState(() {
+                                widget.removeIncome(income);
+                              });
+                            },
+                            child: IncomeCard(
+                              cardImage: income.category,
+                              cardTitle: income.title,
+                              cardDescription: income.description,
+                              time: income.time,
+                              amount: income.amount,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               )
             ],
           ),
