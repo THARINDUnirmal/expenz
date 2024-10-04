@@ -39,7 +39,7 @@ class ExpenzWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.015,
+            width: MediaQuery.of(context).size.width * 0.01,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,17 +48,18 @@ class ExpenzWidget extends StatelessWidget {
                 cardTitle,
                 style: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: kWhite,
                 ),
               ),
               Text(
                 "Rs $cardPrice",
                 style: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 17,
                   fontWeight: FontWeight.w600,
                   color: kWhite,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           )
