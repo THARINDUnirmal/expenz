@@ -22,7 +22,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  int selectIndex = 0;
+  int _selectIndex = 0;
   ExpenseCategories _expenseCategories = ExpenseCategories.food;
   IncomeCategories _incomeCategories = IncomeCategories.freelance;
 
@@ -40,7 +40,7 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: selectIndex == 0 ? kRed : kGreen,
+      backgroundColor: _selectIndex == 0 ? kRed : kGreen,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -62,14 +62,14 @@ class _AddScreenState extends State<AddScreen> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectIndex = 0;
+                              _selectIndex = 0;
                             });
                           },
                           child: Container(
                             padding: const EdgeInsets.all(15),
                             width: MediaQuery.of(context).size.width * 0.41,
                             decoration: BoxDecoration(
-                              color: selectIndex == 0 ? kMainColor : kWhite,
+                              color: _selectIndex == 0 ? kMainColor : kWhite,
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Center(
@@ -78,7 +78,7 @@ class _AddScreenState extends State<AddScreen> {
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
-                                  color: selectIndex == 0 ? kWhite : kBlack,
+                                  color: _selectIndex == 0 ? kWhite : kBlack,
                                 ),
                               ),
                             ),
@@ -87,14 +87,14 @@ class _AddScreenState extends State<AddScreen> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectIndex = 1;
+                              _selectIndex = 1;
                             });
                           },
                           child: Container(
                             padding: const EdgeInsets.all(15),
                             width: MediaQuery.of(context).size.width * 0.41,
                             decoration: BoxDecoration(
-                              color: selectIndex == 1 ? kMainColor : kWhite,
+                              color: _selectIndex == 1 ? kMainColor : kWhite,
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Center(
@@ -103,7 +103,7 @@ class _AddScreenState extends State<AddScreen> {
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
-                                  color: selectIndex == 1 ? kWhite : kBlack,
+                                  color: _selectIndex == 1 ? kWhite : kBlack,
                                 ),
                               ),
                             ),
@@ -184,7 +184,7 @@ class _AddScreenState extends State<AddScreen> {
                               borderRadius: BorderRadius.circular(100),
                             ),
                           ),
-                          items: selectIndex == 0
+                          items: _selectIndex == 0
                               ? ExpenseCategories.values.map((c) {
                                   return DropdownMenuItem(
                                     value: c,
@@ -197,12 +197,12 @@ class _AddScreenState extends State<AddScreen> {
                                     child: Text(c.name),
                                   );
                                 }).toList(),
-                          value: selectIndex == 0
+                          value: _selectIndex == 0
                               ? _expenseCategories
                               : _incomeCategories,
                           onChanged: (value) {
                             setState(() {
-                              selectIndex == 0
+                              _selectIndex == 0
                                   ? _expenseCategories =
                                       value as ExpenseCategories
                                   : _incomeCategories =
@@ -391,7 +391,7 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            if (selectIndex == 0) {
+                            if (_selectIndex == 0) {
                               List<Expense> exList =
                                   await ExpenseServicers().loadExpenses();
 
@@ -444,7 +444,7 @@ class _AddScreenState extends State<AddScreen> {
                           },
                           child: Button(
                             buttonTitle: "Add",
-                            buttonColor: selectIndex == 0 ? kRed : kGreen,
+                            buttonColor: _selectIndex == 0 ? kRed : kGreen,
                           ),
                         )
                       ],

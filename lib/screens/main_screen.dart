@@ -19,7 +19,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   //curunt index
-  int cIndex = 0;
+  int cIndex = 3;
 
   //fetch all expenses data
   List<Expense> allExpenses = [];
@@ -85,6 +85,40 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  //find all expenses categorises amount
+  Map<ExpenseCategories, double> findExpensesCaAmount() {
+    Map<ExpenseCategories, double> allAmountaInExpenses = {
+      ExpenseCategories.food: 0,
+      ExpenseCategories.health: 0,
+      ExpenseCategories.shopping: 0,
+      ExpenseCategories.subscriptions: 0,
+      ExpenseCategories.transport: 0,
+    };
+
+    for (Expense expense in allExpenses) {
+      allAmountaInExpenses[expense.category] =
+          allAmountaInExpenses[expense.category]! + expense.amount;
+    }
+
+    return allAmountaInExpenses;
+  }
+
+  //find all incomes categeres amounts
+  Map<IncomeCategories, double> findIncomesCaAmount() {
+    Map<IncomeCategories, double> allAmountIncomes = {
+      IncomeCategories.freelance: 0,
+      IncomeCategories.passive: 0,
+      IncomeCategories.salary: 0,
+      IncomeCategories.sales: 0,
+    };
+    for (Income income in allIncomes) {
+      allAmountIncomes[income.category] =
+          allAmountIncomes[income.category]! + income.amount;
+    }
+
+    return allAmountIncomes;
+  }
+
   //fetch expenses data
   @override
   void initState() {
@@ -113,7 +147,10 @@ class _MainScreenState extends State<MainScreen> {
         addIncome: addIncome,
         addExpense: addExpenses,
       ),
-      const BudgetScreen(),
+      BudgetScreen(
+        expensesAmount: findExpensesCaAmount(),
+        incomeAmount: findIncomesCaAmount(),
+      ),
       const ProfileScreen(),
     ];
     return Scaffold(

@@ -1,13 +1,24 @@
+import 'package:expenz_app/models/expense%20_categories.dart';
+import 'package:expenz_app/models/income%20_categories.dart';
+import 'package:expenz_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class BudgetScreen extends StatefulWidget {
-  const BudgetScreen({super.key});
+  final Map<ExpenseCategories, double> expensesAmount;
+  final Map<IncomeCategories, double> incomeAmount;
+
+  const BudgetScreen({
+    super.key,
+    required this.expensesAmount,
+    required this.incomeAmount,
+  });
 
   @override
   State<BudgetScreen> createState() => _BudgetScreenState();
 }
 
 class _BudgetScreenState extends State<BudgetScreen> {
+  int _selectIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +31,74 @@ class _BudgetScreenState extends State<BudgetScreen> {
           ),
         ),
         centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectIndex = 0;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      width: MediaQuery.of(context).size.width * 0.41,
+                      decoration: BoxDecoration(
+                        color: _selectIndex == 0 ? kMainColor : kWhite,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Expense",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: _selectIndex == 0 ? kWhite : kBlack,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectIndex = 1;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      width: MediaQuery.of(context).size.width * 0.41,
+                      decoration: BoxDecoration(
+                        color: _selectIndex == 1 ? kMainColor : kWhite,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Income",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: _selectIndex == 1 ? kWhite : kBlack,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
