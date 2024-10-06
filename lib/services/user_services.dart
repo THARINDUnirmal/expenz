@@ -57,4 +57,12 @@ class UserServices {
 
     return {"userName": uName!, "userEmail": uEmail!};
   }
+
+  //delete user data
+
+  static Future<void> deleteUserData(BuildContext context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.remove("userName");
+    await pref.remove("userEmail");
+  }
 }

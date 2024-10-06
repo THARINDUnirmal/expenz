@@ -119,4 +119,28 @@ class IncomeServices {
       }
     }
   }
+
+  //remove expenses data
+  Future<void> clearAllIncomesData(BuildContext context) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.remove(_incomeKey);
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Log out Succsess"),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Log out failed"),
+          ),
+        );
+      }
+    }
+  }
 }

@@ -1,3 +1,6 @@
+import 'package:expenz_app/screens/onbording%20screens/onbording_screens.dart';
+import 'package:expenz_app/services/expense_servicers.dart';
+import 'package:expenz_app/services/income_services.dart';
 import 'package:expenz_app/services/user_services.dart';
 import 'package:expenz_app/utils/colors.dart';
 import 'package:expenz_app/widgets/profile_screen_widget.dart';
@@ -18,10 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     UserServices.getUserDetails().then((value) {
       setState(() {
-        if (value["userName"] != null) {
+        if (value["userName"] != null && value["userEmail"] != null) {
           _userName = value["userName"]!;
-        }
-        if (value["userEmail"] != null) {
           _email = value["userEmail"]!;
         }
       });
@@ -36,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.3,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -62,14 +63,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("yes"),
+                    onPressed: () {
+                      //delete user data
+                      UserServices.deleteUserData(context);
+                      //delete all expenses and incomes
+                      ExpenseServicers().clearAllExpensesData(context);
+                      IncomeServices().clearAllIncomesData(context);
+
+                      //navigator
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OnbordingScreens(),
+                          ));
+                    },
+                    child: const Text(
+                      "yes",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("no"),
+                    child: const Text(
+                      "no",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ],
               )
@@ -87,7 +113,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.4,
+          padding: const EdgeInsets.all(20),
+          height: MediaQuery.of(context).size.height * 0.7,
           width: double.infinity,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -111,10 +138,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 30,
               ),
               ElevatedButton(
+                style: const ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.blue)),
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("okay"),
+                child: const Text(
+                  "okay",
+                  style: TextStyle(
+                    color: kWhite,
+                  ),
+                ),
               )
             ],
           ),
@@ -208,25 +242,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      _otherBottomSheet(context, "Goto log out featuer");
+                      _otherBottomSheet(context,
+                          "*First, go to the \"Add screen\" and add your Incomes and Expenses.\n\n*On the \"Home Screen\", it will display the total of all your Incomes and Expenses.\n*On the \"Transaction screen\", you can view all the Incomes and Expenses you've added, and you can also swipe to delete them.\n*On the \"Budgets screen\", you can view the proportion of your Incomes and Expenses through a pie chart.");
                     },
                     child: const ProfileScreenWidget(
-                      text: "My Wallet",
-                      iconType: Icons.wallet,
+                      text: "How to use",
+                      iconType: Icons.verified_user_sharp,
                       backColor: Color(0xffEEE5FF),
                     ),
                   ),
                   const Divider(),
-                  const ProfileScreenWidget(
-                    text: "Settings",
-                    iconType: Icons.settings,
-                    backColor: Color(0xffEEE5FF),
+                  GestureDetector(
+                    onTap: () {
+                      _otherBottomSheet(context,
+                          "*Here, you have the ability to add your Incomes and Expenses.\n\n*Additionally, by clicking the log out button available on the \"profile screen\", you can log out of the app. \n\n*When doing so, all the data stored in the app will be deleted.");
+                    },
+                    child: const ProfileScreenWidget(
+                      text: "features",
+                      iconType: Icons.settings,
+                      backColor: Color(0xffEEE5FF),
+                    ),
                   ),
                   const Divider(),
-                  const ProfileScreenWidget(
-                    text: "Export Data",
-                    iconType: Icons.download,
-                    backColor: Color(0xffEEE5FF),
+                  GestureDetector(
+                    onTap: () {
+                      _otherBottomSheet(context, "This feature is disabled!");
+                    },
+                    child: const ProfileScreenWidget(
+                      text: "Export Data",
+                      iconType: Icons.download,
+                      backColor: Color(0xffEEE5FF),
+                    ),
                   ),
                   const Divider(),
                   GestureDetector(
