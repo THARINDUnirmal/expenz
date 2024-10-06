@@ -14,6 +14,7 @@ class OnbordingScreens extends StatefulWidget {
 }
 
 class _OnbordingScreensState extends State<OnbordingScreens> {
+  bool showDetailsPaage = false;
   PageController contraller = PageController();
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,13 @@ class _OnbordingScreensState extends State<OnbordingScreens> {
         child: Stack(
           children: [
             PageView(
+              onPageChanged: (index) {
+                setState(
+                  () {
+                    showDetailsPaage = index == 3;
+                  },
+                );
+              },
               controller: contraller,
               children: const [
                 LogoPage(),
@@ -61,20 +69,36 @@ class _OnbordingScreensState extends State<OnbordingScreens> {
               bottom: 10,
               left: 0,
               right: 0,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Details(),
+              child: showDetailsPaage
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Details(),
+                          ),
+                        );
+                      },
+                      child: Button(
+                        buttonTitle: showDetailsPaage ? "Get Start" : "Next",
+                        buttonColor: kMainColor,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        contraller.animateToPage(
+                          contraller.page!.toInt() + 1,
+                          duration: const Duration(
+                            milliseconds: 400,
+                          ),
+                          curve: Curves.linear,
+                        );
+                      },
+                      child: Button(
+                        buttonTitle: showDetailsPaage ? "Get Start" : "Next",
+                        buttonColor: kMainColor,
+                      ),
                     ),
-                  );
-                },
-                child: const Button(
-                  buttonColor: kMainColor,
-                  buttonTitle: "Log in",
-                ),
-              ),
             ),
           ],
         ),

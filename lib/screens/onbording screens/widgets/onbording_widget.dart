@@ -22,13 +22,13 @@ class OnbordingWidget extends StatelessWidget {
         children: [
           Image.asset(
             cardImageUrl,
-            width: 350,
+            width: MediaQuery.of(context).size.width * 0.7,
             fit: BoxFit.cover,
           ),
           Text(
             cardTitile,
             style: const TextStyle(
-              fontSize: 40,
+              fontSize: 30,
               fontWeight: FontWeight.w800,
               color: kBlack,
             ),
@@ -40,7 +40,7 @@ class OnbordingWidget extends StatelessWidget {
           Text(
             cardDescription,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: FontWeight.w500,
               color: kGrey,
             ),
