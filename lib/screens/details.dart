@@ -63,7 +63,7 @@ class _DetailsState extends State<Details> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please enter user name";
+                            return "Please Enter User Name";
                           } else {
                             return null;
                           }
@@ -88,7 +88,7 @@ class _DetailsState extends State<Details> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Pleace enter Email";
+                            return "Please Enter Email";
                           } else {
                             return null;
                           }
@@ -113,7 +113,7 @@ class _DetailsState extends State<Details> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Pleace enter Password";
+                            return "Pleace Enter Password";
                           } else {
                             return null;
                           }
@@ -139,7 +139,7 @@ class _DetailsState extends State<Details> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Pleace enter Comfirm Password";
+                            return "Please Enter Comfirm Password";
                           } else {
                             return null;
                           }
@@ -167,7 +167,7 @@ class _DetailsState extends State<Details> {
                           const Text(
                             "Remember me for the next time",
                             style: TextStyle(
-                              fontSize: 19,
+                              fontSize: 18,
                               fontWeight: FontWeight.w600,
                               color: kGrey,
                             ),
@@ -202,12 +202,17 @@ class _DetailsState extends State<Details> {
                               comfirmPassword: comfirmPassword,
                               context: context,
                             );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MainScreen(),
-                              ),
-                            );
+
+                            if (password == comfirmPassword) {
+                              if (context.mounted) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainScreen(),
+                                  ),
+                                );
+                              }
+                            }
                           }
                         },
                         child: const Button(

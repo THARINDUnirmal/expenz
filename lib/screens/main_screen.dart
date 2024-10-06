@@ -19,7 +19,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   //curunt index
-  int cIndex = 3;
+  int cIndex = 4;
 
   //fetch all expenses data
   List<Expense> allExpenses = [];

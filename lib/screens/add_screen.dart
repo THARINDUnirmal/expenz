@@ -37,6 +37,8 @@ class _AddScreenState extends State<AddScreen> {
   //time picker
   DateTime _timeNow = DateTime.now();
 
+  //form key
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,7 +160,7 @@ class _AddScreenState extends State<AddScreen> {
                   margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.27,
                   ),
-                  height: MediaQuery.of(context).size.height * 0.75,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -168,6 +170,7 @@ class _AddScreenState extends State<AddScreen> {
                     color: kWhite,
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         DropdownButtonFormField(
@@ -215,6 +218,13 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         TextFormField(
                           controller: _title,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter A Title";
+                            } else {
+                              return null;
+                            }
+                          },
                           decoration: InputDecoration(
                             hintText: "Title",
                             hintStyle: const TextStyle(
@@ -234,6 +244,13 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         TextFormField(
                           controller: _description,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter A Description";
+                            } else {
+                              return null;
+                            }
+                          },
                           decoration: InputDecoration(
                             hintText: "Description",
                             hintStyle: const TextStyle(
@@ -253,6 +270,18 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         TextFormField(
                           controller: _amount,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter A Amount";
+                            }
+                            double? thisAmount = double.tryParse(value);
+
+                            if (thisAmount == null || thisAmount <= 0) {
+                              return "Please Enter A Valid Amount! (eg:0 < amount)";
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Amount",
@@ -391,55 +420,57 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            if (_selectIndex == 0) {
-                              List<Expense> exList =
-                                  await ExpenseServicers().loadExpenses();
+                            if (_formKey.currentState!.validate()) {
+                              if (_selectIndex == 0) {
+                                List<Expense> exList =
+                                    await ExpenseServicers().loadExpenses();
 
-                              Expense expensesData = Expense(
-                                id: exList.length + 1,
-                                title: _title.text,
-                                amount: _amount.text.isEmpty
-                                    ? 0
-                                    : double.parse(_amount.text),
-                                category: _expenseCategories,
-                                date: _date,
-                                time: _timeNow,
-                                description: _description.text,
-                              );
+                                Expense expensesData = Expense(
+                                  id: exList.length + 1,
+                                  title: _title.text,
+                                  amount: _amount.text.isEmpty
+                                      ? 0
+                                      : double.parse(_amount.text),
+                                  category: _expenseCategories,
+                                  date: _date,
+                                  time: _timeNow,
+                                  description: _description.text,
+                                );
 
-                              //add expenses
-                              widget.addExpense(expensesData);
+                                //add expenses
+                                widget.addExpense(expensesData);
 
-                              //clear filds data in Ui
-                              _title.clear();
-                              _description.clear();
-                              _amount.clear();
-                            } else {
-                              //load income data to create income id
+                                //clear filds data in Ui
+                                _title.clear();
+                                _description.clear();
+                                _amount.clear();
+                              } else {
+                                //load income data to create income id
 
-                              List<Income> incomeDataList =
-                                  await IncomeServices().loadIncome();
+                                List<Income> incomeDataList =
+                                    await IncomeServices().loadIncome();
 
-                              //create id
-                              Income incomeData = Income(
-                                id: incomeDataList.length + 1,
-                                title: _title.text,
-                                amount: _amount.text.isEmpty
-                                    ? 0
-                                    : double.parse(_amount.text),
-                                category: _incomeCategories,
-                                date: _date,
-                                time: _timeNow,
-                                description: _description.text,
-                              );
+                                //create id
+                                Income incomeData = Income(
+                                  id: incomeDataList.length + 1,
+                                  title: _title.text,
+                                  amount: _amount.text.isEmpty
+                                      ? 0
+                                      : double.parse(_amount.text),
+                                  category: _incomeCategories,
+                                  date: _date,
+                                  time: _timeNow,
+                                  description: _description.text,
+                                );
 
-                              //add income
-                              widget.addIncome(incomeData);
+                                //add income
+                                widget.addIncome(incomeData);
 
-                              //clear filds data in Ui
-                              _title.clear();
-                              _description.clear();
-                              _amount.clear();
+                                //clear filds data in Ui
+                                _title.clear();
+                                _description.clear();
+                                _amount.clear();
+                              }
                             }
                           },
                           child: Button(
