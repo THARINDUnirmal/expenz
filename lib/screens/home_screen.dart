@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.asset(
-                            "assets/images/user.jpg",
+                            "assets/images/user1.jpg",
                             width: 70,
                             fit: BoxFit.cover,
                           ),
@@ -110,11 +110,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Color.fromARGB(255, 224, 22, 231),
                                 Colors.red,
                               ]),
-                          Text(
-                            userName,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Text(
+                              userName,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],

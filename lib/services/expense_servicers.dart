@@ -120,14 +120,6 @@ class ExpenseServicers {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       await pref.remove(_expenseKey);
-
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Log out Succsess"),
-          ),
-        );
-      }
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

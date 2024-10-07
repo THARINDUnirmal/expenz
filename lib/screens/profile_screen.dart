@@ -182,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Image.asset(
-                        "assets/images/user.jpg",
+                        "assets/images/user1.jpg",
                         width: 80,
                       ),
                     ),
@@ -194,7 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 210,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
                           _email,
                           style: const TextStyle(
@@ -202,13 +202,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontWeight: FontWeight.w600,
                             color: kGrey,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       SizedBox(
-                        width: 210,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
                           _userName,
                           style: const TextStyle(

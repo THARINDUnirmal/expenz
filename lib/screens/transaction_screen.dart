@@ -30,7 +30,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 15,
+            horizontal: 10,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
